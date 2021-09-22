@@ -115,7 +115,7 @@ function animalNames(animals) {
       `name: ${animal.animal_name}, scientific: ${animal.scientific_name}`
     )
   );
-  console.log(displayNames);
+  // console.log(displayNames);
 }
 animalNames(zooAnimals);
 /* 🦁🦁🦁 Request 2: .map() 🦁🦁🦁
@@ -125,7 +125,7 @@ animalNames(zooAnimals);
   */
 
 function lowerCaseNames(names) {
-  console.log(names.map((name) => name.animal_name.toLowerCase()));
+  return names.map((name) => name.animal_name.toLowerCase());
 }
 lowerCaseNames(zooAnimals);
 
@@ -135,9 +135,9 @@ lowerCaseNames(zooAnimals);
   */
 
 function lowPopulationAnimals(animals) {
-  console.log(animals.filter((animal) => animal.population < 5));
+  return animals.filter((animal) => animal.population < 5);
 }
-lowPopulationAnimals(zooAnimals);
+// lowPopulationAnimals(zooAnimals);
 
 /* 🦁🦁🦁 Request 4: .reduce() 🦁🦁🦁
   The zoo needs to know their total animal population across the United States.
@@ -146,11 +146,11 @@ lowPopulationAnimals(zooAnimals);
   */
 
 function USApop(animals) {
-  let population = animals.reduce(
+  return animals.reduce(
     (previous, current) => previous + current.population,
     0
   );
-  console.log(population);
+  // console.log(population);
 }
 USApop(zooAnimals);
 
@@ -162,27 +162,27 @@ USApop(zooAnimals);
  * The consume function should return the invocation of cb, passing a and b into cb as arguments
  */
 
-function consume(/*Your Code Here */) {
-  /*Your Code Here */
+function consume(a, b, cb) {
+  return cb(a, b);
 }
 
 /* 🦁🦁🦁 Step 2: Create several functions to callback with consume(); 🦁🦁🦁 */
 // 🦁🦁🦁 Use add to return the sum of two numbers 🦁🦁🦁
 
-function add(/*Your Code Here */) {
-  /*Your Code Here*/
+function add(a, b) {
+  return a + b;
 }
 
 // 🦁🦁🦁 Use multiply to return the product of two numbers 🦁🦁🦁
 
-function multiply(/*Your Code Here */) {
-  /*Your Code Here */
+function multiply(a, b) {
+  return a * b;
 }
 
 // 🦁🦁🦁 Use greeting to accept a first and last name and return "Hello {first-name} {last-name}, nice to meet you!" 🦁🦁🦁
 
-function greeting(/*Your Code Here */) {
-  return; /*Your Code Here */
+function greeting(first, last) {
+  return `Hello, ${first} ${last}, nice to meet you!`;
 }
 
 // 🦁🦁🦁 Step 3: Check your work by un-commenting the following calls to consume(): 🦁🦁🦁
@@ -196,35 +196,61 @@ function greeting(/*Your Code Here */) {
 /* 🐴🐴🐴 Step 1: Base Constructor 🐴🐴🐴
  Use the constructor function named CuboidMaker to accept properties for length, width, and height which can be initialized as an object
 */
-function CuboidMaker(/*Your Code Here */) {
-  /*Your Code Here */
+
+function CuboidMaker(obj) {
+  this.l = obj.l;
+  this.w = obj.w;
+  this.h = obj.h;
 }
 
 /* 🐴🐴🐴 Step 2: Volume Method 🐴🐴🐴
   Create a method called volume using CuboidMaker's prototype that returns the volume of a given cuboid's length, width, and height
   Formula for cuboid volume: length * width * height   */
 
+CuboidMaker.prototype.volume = function () {
+  return this.l * this.w * this.h;
+};
+
 /* 🐴🐴🐴 Step 3: Surface Area Method 🐴🐴🐴
   Create another method called surfaceArea using CuboidMaker's prototype that returns the surface area of a given cuboid's length, width, and height.
   Formula for cuboid surface area of a cube:
   2 * (length * width + length * height + width * height)  */
 
+CuboidMaker.prototype.surfaceArea = function () {
+  return 2 * (this.l * this.w + this.l * this.h + this.w * this.h);
+};
+
 /* 🐴🐴🐴 Step 4: Create a new object that uses CuboidMaker 🐴🐴🐴
   Create an object called cuboid that uses the new keyword to use our CuboidMaker constructor
   Add properties and values of length: 4, width: 5, and height: 5 to cuboid. */
 
+const cuboid = new CuboidMaker({ l: 4, w: 5, h: 5 });
+
 // 🐴🐴🐴 Test your volume and surfaceArea methods by uncommenting the logs below: 🐴🐴🐴
 // ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️
-// console.log(cuboid.volume()); // 100
-// console.log(cuboid.surfaceArea()); // 130
+console.log(cuboid.volume()); // 100
+console.log(cuboid.surfaceArea()); // 130
 
 // 🦄🦄🦄 Topic 4: Classes 🦄🦄🦄 //
 //🦄🦄🦄 1. Take your prototypes from above and refactor into class syntax. Please rename your class CuboidMakerTwo and your object cuboidTwo 🦄🦄🦄
-class CuboidMakerTwo {}
+class CuboidMakerTwo {
+  constructor(obj) {
+    this.l = obj.l;
+    this.w = obj.w;
+    this.h = obj.h;
+  }
+  volume() {
+    return this.l * this.w * this.h;
+  }
+  surfaceArea() {
+    return 2 * (this.l * this.w + this.l * this.h + this.w * this.h);
+  }
+}
+const cuboidTwo = new CuboidMakerTwo({ l: 4, w: 5, h: 5 });
 
 //🦄🦄🦄 Test your volume and surfaceArea methods by uncommenting the logs below: 🦄🦄🦄
-// console.log(cuboidTwo.volume()); // 100
-// console.log(cuboidTwo.surfaceArea()); // 130
+console.log(cuboidTwo.volume()); // 100
+console.log(cuboidTwo.surfaceArea()); // 130
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
 function foo() {
